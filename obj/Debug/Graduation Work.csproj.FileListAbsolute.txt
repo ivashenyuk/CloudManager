@@ -1,0 +1,13 @@
+D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\bin\Debug\Graduation Work.exe.config
+D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\bin\Debug\Graduation Work.exe
+D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\bin\Debug\Graduation Work.pdb
+D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\obj\Debug\Graduation Work.csprojResolveAssemblyReference.cache
+D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\obj\Debug\Graduation_Work.Form1.resources
+D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\obj\Debug\Graduation_Work.Properties.Resources.resources
+D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\obj\Debug\Graduation Work.csproj.GenerateResource.Cache
+D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\obj\Debug\Graduation Work.csproj.CoreCompileInputs.cache
+D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\obj\Debug\Graduation Work.exe
+D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\obj\Debug\Graduation Work.pdb
+D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\bin\Debug\MetroFramework.Design.dll
+D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\bin\Debug\MetroFramework.dll
+D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\bin\Debug\MetroFramework.Fonts.dll
