@@ -10,5 +10,5 @@ D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\G
 D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\bin\Debug\MetroFramework.dll
 D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\bin\Debug\MetroFramework.Fonts.dll
 D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\obj\Debug\Graduation_Work.Properties.Resources.resources
-D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\obj\Debug\Graduation_Work.MainForm.resources
 D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\bin\Debug\Newtonsoft.Json.dll
+D:\Windows\ООП\Дипломна робота 2018 (Віняр Андрій)\Graduation Work\Graduation Work\obj\Debug\Graduation_Work.MainForm.resources

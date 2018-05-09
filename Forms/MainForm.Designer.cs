@@ -1,4 +1,6 @@
-﻿namespace Graduation_Work
+﻿using System.Drawing;
+
+namespace Graduation_Work
 {
     partial class MainForm
     {
@@ -49,9 +51,13 @@
             this.файлToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.скачатиФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.завантажитиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.створитиПапкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.видалитиПапкуАбоФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileWindow = new System.Windows.Forms.OpenFileDialog();
             this.saveFileWindow = new System.Windows.Forms.SaveFileDialog();
-            this.створитиПапкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageListArrows = new System.Windows.Forms.ImageList(this.components);
+            this.backBtn = new System.Windows.Forms.Label();
+            this.оновитиСписокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -104,6 +110,7 @@
             this.treeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.treeView.Location = new System.Drawing.Point(0, 0);
             this.treeView.Name = "treeView";
             this.treeView.Size = new System.Drawing.Size(215, 678);
@@ -182,13 +189,17 @@
             this.colLastChange,
             this.colType,
             this.colSize});
+            this.listView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.listView.LargeImageList = this.imageList;
-            this.listView.Location = new System.Drawing.Point(2, 0);
+            this.listView.Location = new System.Drawing.Point(0, 0);
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(942, 631);
+            this.listView.SmallImageList = this.imageList;
             this.listView.TabIndex = 0;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
+            this.listView.DoubleClick += new System.EventHandler(this.listView_DoubleClick);
+            this.listView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView_MouseClick);
             // 
             // colName
             // 
@@ -225,11 +236,12 @@
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.White;
+            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(10, 60);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1163, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1163, 25);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -238,24 +250,40 @@
             this.файлToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.скачатиФайлToolStripMenuItem,
             this.завантажитиToolStripMenuItem,
-            this.створитиПапкуToolStripMenuItem});
+            this.створитиПапкуToolStripMenuItem,
+            this.видалитиПапкуАбоФайлToolStripMenuItem,
+            this.оновитиСписокToolStripMenuItem});
             this.файлToolStripMenuItem1.Name = "файлToolStripMenuItem1";
-            this.файлToolStripMenuItem1.Size = new System.Drawing.Size(48, 20);
+            this.файлToolStripMenuItem1.Size = new System.Drawing.Size(50, 21);
             this.файлToolStripMenuItem1.Text = "Файл";
             // 
             // скачатиФайлToolStripMenuItem
             // 
             this.скачатиФайлToolStripMenuItem.Name = "скачатиФайлToolStripMenuItem";
-            this.скачатиФайлToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.скачатиФайлToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.скачатиФайлToolStripMenuItem.Text = "Скачати";
             this.скачатиФайлToolStripMenuItem.Click += new System.EventHandler(this.скачатиФайлToolStripMenuItem_Click);
             // 
             // завантажитиToolStripMenuItem
             // 
             this.завантажитиToolStripMenuItem.Name = "завантажитиToolStripMenuItem";
-            this.завантажитиToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.завантажитиToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.завантажитиToolStripMenuItem.Text = "Завантажити";
             this.завантажитиToolStripMenuItem.Click += new System.EventHandler(this.завантажитиToolStripMenuItem_Click);
+            // 
+            // створитиПапкуToolStripMenuItem
+            // 
+            this.створитиПапкуToolStripMenuItem.Name = "створитиПапкуToolStripMenuItem";
+            this.створитиПапкуToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.створитиПапкуToolStripMenuItem.Text = "Створити папку";
+            this.створитиПапкуToolStripMenuItem.Click += new System.EventHandler(this.створитиПапкуToolStripMenuItem_Click);
+            // 
+            // видалитиПапкуАбоФайлToolStripMenuItem
+            // 
+            this.видалитиПапкуАбоФайлToolStripMenuItem.Name = "видалитиПапкуАбоФайлToolStripMenuItem";
+            this.видалитиПапкуАбоФайлToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.видалитиПапкуАбоФайлToolStripMenuItem.Text = "Видалити папку або файл";
+            this.видалитиПапкуАбоФайлToolStripMenuItem.Click += new System.EventHandler(this.видалитиПапкуАбоФайлToolStripMenuItem_Click);
             // 
             // openFileWindow
             // 
@@ -264,22 +292,45 @@
             this.openFileWindow.Multiselect = true;
             this.openFileWindow.RestoreDirectory = true;
             // 
-            // створитиПапкуToolStripMenuItem
+            // imageListArrows
             // 
-            this.створитиПапкуToolStripMenuItem.Name = "створитиПапкуToolStripMenuItem";
-            this.створитиПапкуToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.створитиПапкуToolStripMenuItem.Text = "Створити папку";
+            this.imageListArrows.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListArrows.ImageStream")));
+            this.imageListArrows.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListArrows.Images.SetKeyName(0, "iconBack.png");
+            this.imageListArrows.Images.SetKeyName(1, "iconNext.png");
+            // 
+            // backBtn
+            // 
+            this.backBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.backBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.backBtn.Location = new System.Drawing.Point(24, 23);
+            this.backBtn.Name = "backBtn";
+            this.backBtn.Size = new System.Drawing.Size(30, 30);
+            this.backBtn.TabIndex = 2;
+            this.backBtn.Text = "<";
+            this.backBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
+            this.backBtn.MouseLeave += new System.EventHandler(this.backBtn_MouseLeave);
+            this.backBtn.MouseHover += new System.EventHandler(this.backBtn_MouseHover);
+            // 
+            // оновитиСписокToolStripMenuItem
+            // 
+            this.оновитиСписокToolStripMenuItem.Name = "оновитиСписокToolStripMenuItem";
+            this.оновитиСписокToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.оновитиСписокToolStripMenuItem.Text = "Оновити список";
+            this.оновитиСписокToolStripMenuItem.Click += new System.EventHandler(this.оновитиСписокToolStripMenuItem_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1193, 788);
+            this.Controls.Add(this.backBtn);
             this.Controls.Add(this.mPanel);
             this.Controls.Add(this.menuStrip1);
             this.Name = "MainForm";
             this.Padding = new System.Windows.Forms.Padding(10, 60, 20, 20);
-            this.Text = "Ваш менеджер файлів в Хмарі";
+            this.Text = "     Ваш менеджер файлів в Хмарі";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.mPanel.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -318,6 +369,10 @@
         private System.Windows.Forms.OpenFileDialog openFileWindow;
         private System.Windows.Forms.SaveFileDialog saveFileWindow;
         private System.Windows.Forms.ToolStripMenuItem створитиПапкуToolStripMenuItem;
+        private System.Windows.Forms.ImageList imageListArrows;
+        private System.Windows.Forms.Label backBtn;
+        private System.Windows.Forms.ToolStripMenuItem видалитиПапкуАбоФайлToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem оновитиСписокToolStripMenuItem;
     }
 }
 
