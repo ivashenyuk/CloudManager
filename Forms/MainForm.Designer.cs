@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Graduation_Work
+namespace Graduation_Work.Forms
 {
     partial class MainForm
     {
@@ -53,11 +53,15 @@ namespace Graduation_Work
             this.завантажитиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.створитиПапкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.видалитиПапкуАбоФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оновитиСписокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.вийтиЗАкаунтаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.вийтиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileWindow = new System.Windows.Forms.OpenFileDialog();
             this.saveFileWindow = new System.Windows.Forms.SaveFileDialog();
             this.imageListArrows = new System.Windows.Forms.ImageList(this.components);
             this.backBtn = new System.Windows.Forms.Label();
-            this.оновитиСписокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusLable = new MetroFramework.Controls.MetroLabel();
+            this.nameUser = new MetroFramework.Controls.MetroLabel();
             this.mPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -190,6 +194,7 @@ namespace Graduation_Work
             this.colType,
             this.colSize});
             this.listView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listView.FullRowSelect = true;
             this.listView.LargeImageList = this.imageList;
             this.listView.Location = new System.Drawing.Point(0, 0);
             this.listView.Name = "listView";
@@ -252,7 +257,9 @@ namespace Graduation_Work
             this.завантажитиToolStripMenuItem,
             this.створитиПапкуToolStripMenuItem,
             this.видалитиПапкуАбоФайлToolStripMenuItem,
-            this.оновитиСписокToolStripMenuItem});
+            this.оновитиСписокToolStripMenuItem,
+            this.вийтиЗАкаунтаToolStripMenuItem,
+            this.вийтиToolStripMenuItem});
             this.файлToolStripMenuItem1.Name = "файлToolStripMenuItem1";
             this.файлToolStripMenuItem1.Size = new System.Drawing.Size(50, 21);
             this.файлToolStripMenuItem1.Text = "Файл";
@@ -285,6 +292,27 @@ namespace Graduation_Work
             this.видалитиПапкуАбоФайлToolStripMenuItem.Text = "Видалити папку або файл";
             this.видалитиПапкуАбоФайлToolStripMenuItem.Click += new System.EventHandler(this.видалитиПапкуАбоФайлToolStripMenuItem_Click);
             // 
+            // оновитиСписокToolStripMenuItem
+            // 
+            this.оновитиСписокToolStripMenuItem.Name = "оновитиСписокToolStripMenuItem";
+            this.оновитиСписокToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.оновитиСписокToolStripMenuItem.Text = "Оновити список";
+            this.оновитиСписокToolStripMenuItem.Click += new System.EventHandler(this.оновитиСписокToolStripMenuItem_Click);
+            // 
+            // вийтиЗАкаунтаToolStripMenuItem
+            // 
+            this.вийтиЗАкаунтаToolStripMenuItem.Name = "вийтиЗАкаунтаToolStripMenuItem";
+            this.вийтиЗАкаунтаToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.вийтиЗАкаунтаToolStripMenuItem.Text = "Вийти з акаунта";
+            this.вийтиЗАкаунтаToolStripMenuItem.Click += new System.EventHandler(this.вийтиЗАкаунтаToolStripMenuItem_Click);
+            // 
+            // вийтиToolStripMenuItem
+            // 
+            this.вийтиToolStripMenuItem.Name = "вийтиToolStripMenuItem";
+            this.вийтиToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.вийтиToolStripMenuItem.Text = "Вийти";
+            this.вийтиToolStripMenuItem.Click += new System.EventHandler(this.вийтиToolStripMenuItem_Click);
+            // 
             // openFileWindow
             // 
             this.openFileWindow.CheckFileExists = false;
@@ -313,24 +341,39 @@ namespace Graduation_Work
             this.backBtn.MouseLeave += new System.EventHandler(this.backBtn_MouseLeave);
             this.backBtn.MouseHover += new System.EventHandler(this.backBtn_MouseHover);
             // 
-            // оновитиСписокToolStripMenuItem
+            // statusLable
             // 
-            this.оновитиСписокToolStripMenuItem.Name = "оновитиСписокToolStripMenuItem";
-            this.оновитиСписокToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.оновитиСписокToolStripMenuItem.Text = "Оновити список";
-            this.оновитиСписокToolStripMenuItem.Click += new System.EventHandler(this.оновитиСписокToolStripMenuItem_Click);
+            this.statusLable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusLable.Location = new System.Drawing.Point(877, 765);
+            this.statusLable.Name = "statusLable";
+            this.statusLable.Size = new System.Drawing.Size(296, 23);
+            this.statusLable.TabIndex = 3;
+            this.statusLable.Text = "Триває завантаження...";
+            this.statusLable.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // nameUser
+            // 
+            this.nameUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nameUser.Location = new System.Drawing.Point(739, 60);
+            this.nameUser.Name = "nameUser";
+            this.nameUser.Size = new System.Drawing.Size(434, 23);
+            this.nameUser.TabIndex = 4;
+            this.nameUser.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1193, 788);
+            this.Controls.Add(this.nameUser);
+            this.Controls.Add(this.statusLable);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.mPanel);
             this.Controls.Add(this.menuStrip1);
             this.Name = "MainForm";
             this.Padding = new System.Windows.Forms.Padding(10, 60, 20, 20);
             this.Text = "     Ваш менеджер файлів в Хмарі";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.mPanel.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -373,6 +416,10 @@ namespace Graduation_Work
         private System.Windows.Forms.Label backBtn;
         private System.Windows.Forms.ToolStripMenuItem видалитиПапкуАбоФайлToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оновитиСписокToolStripMenuItem;
+        private MetroFramework.Controls.MetroLabel statusLable;
+        private System.Windows.Forms.ToolStripMenuItem вийтиЗАкаунтаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem вийтиToolStripMenuItem;
+        private MetroFramework.Controls.MetroLabel nameUser;
     }
 }
 

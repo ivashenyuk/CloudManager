@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Graduation_Work
+namespace Graduation_Work.Forms
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace Graduation_Work
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new LoginForm());
         }
     }
 }

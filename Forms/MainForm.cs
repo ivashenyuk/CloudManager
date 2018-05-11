@@ -14,16 +14,14 @@ using System.Net.Sockets;
 using Newtonsoft.Json;
 using System.IO;
 using Graduation_Work.Classes;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
-using System.Xml.Serialization;
 using System.Threading;
+using Graduation_Work.Forms;
 
-namespace Graduation_Work
+namespace Graduation_Work.Forms
 {
     public partial class MainForm : MetroForm
     {
-        class Inf
+        private class Inf
         {
             private string _nameFile;
             private DateTime _lastWriteTime;
@@ -76,8 +74,7 @@ namespace Graduation_Work
         private List<string> listSteps;
         private string currentDirectory;
         private List<string> currentElementForDelete;
-
-
+        private string fileForDownload = null;
         public MainForm()
         {
             this.listSteps = new List<string>();
@@ -102,6 +99,8 @@ namespace Graduation_Work
             //path.AddPolygon(p);
             //Region region = new Region(path);
             //this.backBtn.Region = region;
+
+            nameUser.Text = LoginForm.user.Name;
         }
         //Loading form
         private void MainForm_Load(object sender, EventArgs e)
@@ -155,6 +154,35 @@ namespace Graduation_Work
         }
         private void скачатиФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            saveFileWindow.FileName = this.GetFileName(fileForDownload);
+
+            DialogResult result = saveFileWindow.ShowDialog();
+            if (result == DialogResult.Cancel)
+                return;
+
+            InfoFileNew infoFile = new InfoFileNew();
+            infoFile._path = fileForDownload;
+            //else get and save file from server 
+            new Task(() =>
+            {
+                Task setTextStatus = new Task(() =>
+                {
+                    for (; ; )
+                    {
+                        statusLable.Text = "Отримання файлу";
+                        for (int i = 0; i < 3; i++)
+                        {
+                            statusLable.Text += ".";
+                            Thread.Sleep(500);
+                        }
+                    }
+                });
+                setTextStatus.Start();
+                byte[] file = GetInfoAboutFileFromServer(infoFile, 2004);
+                File.WriteAllBytes(saveFileWindow.FileName, file);
+                setTextStatus.Dispose();
+
+            }).Start();
 
         }
         private async void завантажитиToolStripMenuItem_Click(object sender, EventArgs e)
@@ -172,7 +200,7 @@ namespace Graduation_Work
                         {
                             result = new byte[myStream.Length];
                             await myStream.ReadAsync(result, 0, (int)myStream.Length);
-                            infoFile._fileName = Path.GetFileName(this.openFileWindow.FileName); //new InfoFileNew(result, Path.GetFileName(this.openFileWindow.FileName), currentDirectory);
+                            infoFile._fileName = Path.GetFileName(this.openFileWindow.FileName); 
                             infoFile._path = currentDirectory;
                             infoFile._sizeFile = myStream.Length;
                             if (myStream != null)
@@ -259,7 +287,7 @@ namespace Graduation_Work
             //UdpClient sender = new UdpClient();
             //IPEndPoint ipEndPoint = new IPEndPoint(remoteIPAddress, port);
 
-             Socket sender = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            Socket sender = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
             // Соединяем сокет с удаленной точкой
             try
@@ -283,6 +311,53 @@ namespace Graduation_Work
             catch (SocketException ex)
             {
                 MessageBox.Show($"Не має підключення до сервера!\n{ex.Message}", "Попередження!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        //Method Send Files to Server
+        static byte[] GetInfoAboutFileFromServer(InfoFileNew path, int port)
+        {
+            // Соединяемся с удаленным устройством
+
+            // Устанавливаем удаленную точку для сокета
+            IPHostEntry ipHost = Dns.GetHostEntry("localhost");
+            IPAddress ipAddr = ipHost.AddressList[0];
+            IPEndPoint ipEndPoint = new IPEndPoint(ipAddr, port);
+
+            ////UdpClient sender = new UdpClient();
+            //// Поля, связанные с UdpClient
+            //IPAddress remoteIPAddress = IPAddress.Parse("127.0.0.1");
+            //UdpClient sender = new UdpClient();
+            //IPEndPoint ipEndPoint = new IPEndPoint(remoteIPAddress, port);
+
+            Socket sender = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+
+            // Соединяем сокет с удаленной точкой
+            try
+            {
+                sender.Connect(ipEndPoint);
+
+                sender.Send(path.PackToXml());
+                byte[] receiveBytes = new byte[5000];
+
+                int bytesRec = sender.Receive(receiveBytes);
+
+                InfoFileNew infoFile = receiveBytes.UnpackFromXml<InfoFileNew>();
+
+
+                byte[] receiveBytes1 = new byte[infoFile._sizeFile];
+
+                int bytesRec1 = sender.Receive(receiveBytes1);
+
+                // Освобождаем сокет
+                sender.Shutdown(SocketShutdown.Both);
+                sender.Close();
+
+                return receiveBytes1;
+            }
+            catch (SocketException ex)
+            {
+                MessageBox.Show($"Не має підключення до сервера!\n{ex.Message}", "Попередження!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
             }
         }
         //Set TreeView elements
@@ -463,6 +538,7 @@ namespace Graduation_Work
             for (int i = 0; i < itemsSelected.Count; i++)
             {
                 string tmpPath = Encoding.UTF8.GetString(itemsSelected[i].Tag as byte[]);
+                fileForDownload = tmpPath;
                 this.currentElementForDelete.Add(tmpPath);
             }
             //MessageBox.Show(this.currentElementForDelete.ToString());
@@ -471,48 +547,24 @@ namespace Graduation_Work
         {
             GetListItemsFromServer(currentDirectory);
         }
-    }
-
-    [Serializable]
-    public class InfoFileNew
-    {
-        public string _fileName = "";
-        public string _path = "";
-        public long _sizeFile = 0;
-    }
-
-    public static class HelperExtention
-    {
-        public static byte[] PackToXml<T>(this T @object)
+        private string GetFileName(string fullName)
         {
-            XmlSerializer fileSerializer = new XmlSerializer(typeof(T));
-            MemoryStream stream = new MemoryStream();
-
-            // Сериализуем объект
-            fileSerializer.Serialize(stream, @object);
-
-            // Считываем поток в байты
-            stream.Position = 0;
-            Byte[] pack = new Byte[stream.Length];
-            stream.Read(pack, 0, Convert.ToInt32(stream.Length));
-
-            return pack;
+            int lastSplit = fullName.LastIndexOf('\\') + 1;
+            return fullName.Substring(lastSplit);
         }
-
-        public static T UnpackFromXml<T>(this byte[] pack)
+        private void вийтиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            XmlSerializer fileSerializer = new XmlSerializer(typeof(T));
-            MemoryStream stream1 = new MemoryStream();
-
-            // Считываем информацию о файле
-            stream1.Write(pack, 0, pack.Length);
-            stream1.Position = 0;
-
-            // Вызываем метод Deserialize
-            T infoFile = (T)fileSerializer.Deserialize(stream1);
-
-
-            return infoFile;
+            this.Close();
+        }
+        private void вийтиЗАкаунтаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
+            this.Hide();
+        }
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
